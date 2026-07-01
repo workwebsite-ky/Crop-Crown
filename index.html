@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Crop Crown — Premium Agriculture Solutions. From seed to harvest, we deliver excellence in farming, crop management, and agricultural consulting." />
+  <meta name="keywords" content="agriculture, crop management, farming solutions, premium agriculture, agri consulting, soil health, irrigation, harvest" />
+  <title>Crop Crown | Premium Agriculture Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --green-deep: #1a3a1f;
+      --green-mid: #2d6a35;
+      --green-light: #4c9e56;
+      --green-pale: #a8d5ad;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-pale: #f5e6be;
+      --soil: #3b2009;
+      --cream: #f9f4ec;
+      --cream-dark: #ede5d0;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-mid: #4a4a4a;
+      --text-light: #888;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --radius: 4px;
+      --radius-lg: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.15);
+      --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--cream);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { border: none; cursor: pointer; font-family: var(--font-body); }
+
+    /* ===== LOADER ===== */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--green-deep);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-inner {
+      text-align: center;
+      animation: loaderPulse 1.5s ease infinite;
+    }
+    .loader-logo {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+    .loader-bar {
+      width: 0; height: 2px;
+      background: var(--gold);
+      margin: 16px auto 0;
+      animation: loaderBar 1.8s ease forwards;
+    }
+    @keyframes loaderBar { to { width: 200px; } }
+    @keyframes loaderPulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+    /* ===== NAV ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 20px 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: var(--transition);
+    }
+    #navbar.scrolled {
+      background: rgba(26,58,31,0.97);
+      backdrop-filter: blur(12px);
+      padding: 14px 60px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.2);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+    .nav-logo span { color: var(--white); }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content:''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--gold);
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--green-deep) !important;
+      padding: 10px 24px;
+      border-radius: 2px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-cta::after { display: none !important; }
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: var(--gold); transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: var(--green-deep);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2rem; color: var(--white);
+      transition: var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute; top: 24px; right: 28px;
+      background: none; font-size: 2rem; color: var(--gold);
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      background: 
+        linear-gradient(to bottom right, rgba(26,58,31,0.88) 0%, rgba(45,106,53,0.7) 50%, rgba(26,58,31,0.9) 100%),
+        url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=1800&q=85') center/cover no-repeat;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-content {
+      max-width: 1200px; margin: 0 auto; padding: 140px 60px 80px;
+      position: relative; z-index: 2;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      padding: 8px 20px; border-radius: 100px;
+      font-size: 0.75rem; color: var(--gold-light);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-tag::before {
+      content:''; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--gold);
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--green-deep);
+      padding: 16px 40px;
+      font-size: 0.875rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 2px;
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::before {
+      content:''; position: absolute; inset: 0;
+      background: var(--white); opacity: 0;
+      transition: var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.4); }
+    .btn-primary:hover::before { opacity: 0.1; }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 16px 40px;
+      font-size: 0.875rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold); color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .hero-scroll {
+      position: absolute; bottom: 48px; left: 60px;
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+      animation: fadeUp 0.8s 0.6s ease both;
+    }
+    .hero-scroll-line {
+      width: 40px; height: 1px; background: rgba(255,255,255,0.3);
+      animation: scrollLine 2s ease infinite;
+    }
+    @keyframes scrollLine { 0%,100%{width:40px} 50%{width:20px} }
+    .hero-stats {
+      position: absolute; right: 60px; bottom: 60px;
+      display: flex; gap: 40px;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 0.7rem; color: rgba(255,255,255,0.55);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .hero-grain {
+      position: absolute; inset: 0; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4; pointer-events: none;
+    }
+
+    /* ===== SECTIONS COMMON ===== */
+    section { padding: 100px 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--green-mid); font-weight: 600;
+      margin-bottom: 16px;
+      position: relative; padding-left: 28px;
+    }
+    .section-tag::before {
+      content:''; position: absolute; left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 18px; height: 1px; background: var(--green-mid);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--green-deep);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-desc {
+      font-size: 1.0625rem; color: var(--text-mid);
+      max-width: 560px; line-height: 1.7; margin-top: 16px;
+    }
+
+    /* ===== ABOUT STRIP ===== */
+    #about-strip {
+      background: var(--green-deep);
+      padding: 60px 0;
+    }
+    .about-strip-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 60px;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 60px; align-items: center;
+    }
+    .about-strip-text {
+      font-family: var(--font-display);
+      font-size: 1.75rem; color: var(--white);
+      font-style: italic; line-height: 1.4;
+    }
+    .about-strip-text em { color: var(--gold); font-style: normal; }
+    .about-strip-divider { width: 1px; height: 80px; background: rgba(201,168,76,0.3); }
+    .about-strip-cred {
+      display: flex; gap: 40px;
+    }
+    .cred-item { text-align: center; }
+    .cred-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem; font-weight: 700; color: var(--gold);
+    }
+    .cred-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+    /* ===== SERVICES ===== */
+    #services { background: var(--cream); }
+    .services-header { margin-bottom: 64px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .service-card {
+      background: var(--white);
+      padding: 48px 36px;
+      position: relative; overflow: hidden;
+      transition: var(--transition);
+      cursor: default;
+    }
+    .service-card::before {
+      content:''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 3px; background: var(--gold);
+      transition: width 0.4s ease;
+    }
+    .service-card:hover { background: var(--green-deep); }
+    .service-card:hover .service-title,
+    .service-card:hover .service-desc { color: var(--white); }
+    .service-card:hover .service-icon { background: rgba(201,168,76,0.15); color: var(--gold); }
+    .service-card:hover::before { width: 100%; }
+    .service-icon {
+      width: 60px; height: 60px;
+      background: var(--cream);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 24px;
+      transition: var(--transition);
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--green-deep); margin-bottom: 12px;
+      transition: var(--transition);
+    }
+    .service-desc {
+      font-size: 0.9375rem; color: var(--text-mid);
+      line-height: 1.65; transition: var(--transition);
+    }
+
+    /* ===== WHY US ===== */
+    #why {
+      background: var(--green-deep);
+      position: relative; overflow: hidden;
+    }
+    #why::before {
+      content:'';
+      position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .why-left .section-tag { color: var(--gold-pale); }
+    .why-left .section-tag::before { background: var(--gold-pale); }
+    .why-left .section-title { color: var(--white); }
+    .why-left .section-desc { color: rgba(255,255,255,0.6); }
+    .why-list { margin-top: 48px; display: flex; flex-direction: column; gap: 28px; }
+    .why-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .why-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .why-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem; font-weight: 700;
+      color: rgba(201,168,76,0.25); line-height: 1;
+      min-width: 48px;
+    }
+    .why-item-title {
+      font-size: 1.0625rem; font-weight: 600;
+      color: var(--white); margin-bottom: 6px;
+    }
+    .why-item-desc { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .why-right {
+      position: relative;
+    }
+    .why-img {
+      width: 100%; aspect-ratio: 4/5;
+      object-fit: cover; border-radius: var(--radius-lg);
+    }
+    .why-badge {
+      position: absolute; bottom: -24px; left: -24px;
+      background: var(--gold);
+      padding: 24px 28px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+    .why-badge-num {
+      font-family: var(--font-display);
+      font-size: 3rem; font-weight: 700;
+      color: var(--green-deep); line-height: 1;
+    }
+    .why-badge-text { font-size: 0.8rem; color: var(--green-deep); font-weight: 600; margin-top: 4px; }
+
+    /* ===== PACKAGES ===== */
+    #packages { background: var(--cream-dark); }
+    .packages-header { text-align: center; margin-bottom: 64px; }
+    .packages-header .section-desc { margin: 16px auto 0; }
+    .packages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px; align-items: start;
+    }
+    .pkg-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 44px 36px;
+      position: relative;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+    .pkg-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--green-pale); }
+    .pkg-card.featured {
+      background: var(--green-deep);
+      transform: scale(1.04);
+      box-shadow: var(--shadow-lg);
+    }
+    .pkg-card.featured:hover { transform: scale(1.04) translateY(-8px); }
+    .pkg-popular {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--green-deep);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 20px; border-radius: 100px;
+    }
+    .pkg-tier {
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--green-mid); font-weight: 600; margin-bottom: 12px;
+    }
+    .pkg-card.featured .pkg-tier { color: var(--gold-pale); }
+    .pkg-name {
+      font-family: var(--font-display);
+      font-size: 1.75rem; font-weight: 700;
+      color: var(--green-deep); margin-bottom: 8px;
+    }
+    .pkg-card.featured .pkg-name { color: var(--white); }
+    .pkg-price {
+      font-family: var(--font-display);
+      font-size: 3rem; font-weight: 700;
+      color: var(--gold); line-height: 1; margin: 20px 0;
+    }
+    .pkg-price sup { font-size: 1.5rem; vertical-align: super; }
+    .pkg-price small { font-size: 1rem; color: var(--text-light); font-family: var(--font-body); }
+    .pkg-card.featured .pkg-price small { color: rgba(255,255,255,0.4); }
+    .pkg-divider { height: 1px; background: var(--cream-dark); margin: 24px 0; }
+    .pkg-card.featured .pkg-divider { background: rgba(255,255,255,0.1); }
+    .pkg-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+    .pkg-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.9rem; color: var(--text-mid);
+    }
+    .pkg-card.featured .pkg-feature { color: rgba(255,255,255,0.75); }
+    .pkg-feature::before {
+      content: '✓'; width: 20px; height: 20px;
+      background: var(--green-pale); color: var(--green-deep);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700; flex-shrink: 0;
+    }
+    .pkg-card.featured .pkg-feature::before { background: rgba(201,168,76,0.2); color: var(--gold); }
+    .pkg-btn {
+      display: block; text-align: center;
+      padding: 14px 24px;
+      border-radius: 2px;
+      font-size: 0.875rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: var(--transition);
+    }
+    .pkg-btn-outline {
+      border: 1px solid var(--green-mid);
+      color: var(--green-deep);
+    }
+    .pkg-btn-outline:hover { background: var(--green-mid); color: var(--white); }
+    .pkg-btn-solid {
+      background: var(--gold);
+      color: var(--green-deep);
+    }
+    .pkg-btn-solid:hover { background: var(--gold-light); }
+
+    /* ===== TESTIMONIALS ===== */
+    #testimonials { background: var(--cream); }
+    .testi-header { margin-bottom: 64px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testi-card {
+      background: var(--white);
+      padding: 36px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cream-dark);
+      transition: var(--transition);
+    }
+    .testi-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+    .testi-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .testi-text {
+      font-family: var(--font-display);
+      font-size: 1.125rem; line-height: 1.6;
+      color: var(--text-dark); font-style: italic;
+      margin-bottom: 24px;
+    }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--green-deep);
+    }
+    .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
+    .testi-role { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+
+    /* ===== ABOUT PAGE SECTION ===== */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img {
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover; border-radius: var(--radius-lg);
+    }
+    .about-img-accent {
+      position: absolute; top: -20px; right: -20px;
+      width: 60%; aspect-ratio: 1;
+      object-fit: cover; border-radius: var(--radius-lg);
+      border: 6px solid var(--cream);
+      z-index: -1;
+      opacity: 0.6;
+    }
+    .about-quote {
+      background: var(--green-deep);
+      padding: 28px 32px;
+      border-radius: var(--radius-lg);
+      margin-top: 32px;
+    }
+    .about-quote-text {
+      font-family: var(--font-display);
+      font-size: 1.125rem; font-style: italic;
+      color: var(--white); line-height: 1.5;
+    }
+    .about-quote-author { font-size: 0.8rem; color: var(--gold); margin-top: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .about-badges {
+      display: flex; gap: 16px; flex-wrap: wrap; margin-top: 36px;
+    }
+    .about-badge {
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 0.8rem; font-weight: 600;
+      color: var(--green-deep);
+    }
+    .mission-vision { margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .mv-card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cream-dark);
+    }
+    .mv-card:first-child { background: var(--green-deep); border-color: transparent; }
+    .mv-title {
+      font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+      font-weight: 700; margin-bottom: 10px;
+    }
+    .mv-card:first-child .mv-title { color: var(--gold); }
+    .mv-card:last-child .mv-title { color: var(--green-mid); }
+    .mv-text { font-size: 0.9rem; line-height: 1.6; }
+    .mv-card:first-child .mv-text { color: rgba(255,255,255,0.7); }
+    .mv-card:last-child .mv-text { color: var(--text-mid); }
+
+    /* ===== FAQ ===== */
+    #faq { background: var(--cream-dark); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+    .faq-item {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      padding: 20px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: none;
+      font-size: 0.9375rem; font-weight: 600;
+      color: var(--text-dark);
+      text-align: left;
+      gap: 12px;
+    }
+    .faq-q:hover { color: var(--green-mid); }
+    .faq-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border-radius: 50%; border: 1px solid var(--cream-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: var(--green-mid);
+      transition: var(--transition);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--green-mid); color: var(--white); border-color: transparent; }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.3s ease;
+      padding: 0 24px;
+      font-size: 0.9rem; color: var(--text-mid); line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+
+    /* ===== CONTACT ===== */
+    #contact { background: var(--white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; margin-top: 48px; }
+    .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--cream); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .contact-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 4px; }
+    .contact-value { font-size: 0.9375rem; font-weight: 500; color: var(--text-dark); }
+    .contact-form-wrap {
+      background: var(--cream);
+      padding: 48px;
+      border-radius: var(--radius-lg);
+    }
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--green-deep); margin-bottom: 28px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 8px; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 14px 16px;
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      border-radius: var(--radius);
+      font-family: var(--font-body);
+      font-size: 0.9375rem; color: var(--text-dark);
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(45,106,53,0.1); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit {
+      width: 100%;
+      background: var(--green-deep);
+      color: var(--white);
+      padding: 16px;
+      border-radius: var(--radius);
+      font-size: 0.875rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: var(--transition);
+    }
+    .form-submit:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,58,31,0.25); }
+
+    /* ===== CTA BANNER ===== */
+    #cta-banner {
+      background: 
+        linear-gradient(135deg, rgba(26,58,31,0.95) 0%, rgba(45,106,53,0.9) 100%),
+        url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1400&q=80') center/cover;
+      text-align: center; padding: 100px 60px;
+    }
+    .cta-banner-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 700; color: var(--white);
+      letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .cta-banner-title em { color: var(--gold); font-style: italic; }
+    .cta-banner-sub { color: rgba(255,255,255,0.65); font-size: 1.0625rem; margin-bottom: 40px; }
+    .cta-banner-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--soil);
+      padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 60px; margin-bottom: 60px;
+    }
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .footer-brand-desc { font-size: 0.875rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
+    .footer-social { display: flex; gap: 12px; margin-top: 24px; }
+    .footer-social a {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; color: rgba(255,255,255,0.5);
+      transition: var(--transition);
+    }
+    .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+    .footer-col-title { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 20px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.875rem; color: rgba(255,255,255,0.45); transition: var(--transition); }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 32px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+    .footer-tagline { font-family: var(--font-display); font-style: italic; font-size: 0.9rem; color: rgba(255,255,255,0.25); }
+
+    /* ===== BACK TO TOP ===== */
+    #back-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 500;
+      width: 48px; height: 48px;
+      background: var(--green-deep);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 1.1rem;
+      cursor: pointer;
+      opacity: 0; transform: translateY(16px);
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    #back-top.visible { opacity: 1; transform: translateY(0); }
+    #back-top:hover { background: var(--gold); color: var(--green-deep); }
+
+    /* ===== WHATSAPP FLOAT ===== */
+    #wa-float {
+      position: fixed; bottom: 92px; right: 32px; z-index: 500;
+      width: 48px; height: 48px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+      transition: var(--transition);
+      font-size: 1.4rem;
+      text-decoration: none;
+    }
+    #wa-float:hover { transform: scale(1.1); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ===== SUCCESS MSG ===== */
+    .form-success {
+      display: none;
+      background: #e8f5e9;
+      border: 1px solid var(--green-light);
+      color: var(--green-deep);
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      font-size: 0.9rem; font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .container { padding: 0 40px; }
+      #navbar { padding: 18px 40px; }
+      #navbar.scrolled { padding: 12px 40px; }
+      .hero-content { padding: 140px 40px 80px; }
+      .hero-stats { right: 40px; bottom: 40px; }
+      .about-strip-inner { padding: 0 40px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+      .pkg-card.featured { transform: none; }
+      .pkg-card.featured:hover { transform: translateY(-8px); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 72px 0; }
+      .container { padding: 0 24px; }
+      #navbar { padding: 16px 24px; }
+      #navbar.scrolled { padding: 12px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-content { padding: 120px 24px 100px; }
+      .hero-stats { display: none; }
+      .hero-scroll { left: 24px; }
+      .about-strip-inner { grid-template-columns: 1fr; gap: 32px; }
+      .about-strip-divider { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 48px; }
+      .why-right { display: none; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img-wrap img { aspect-ratio: 16/9; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .contact-form-wrap { padding: 28px 24px; }
+      #cta-banner { padding: 72px 24px; }
+      .mission-vision { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">Crop Crown</div>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Crop<span> Crown</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">✕</button>
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#packages" class="mobile-link">Packages</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#testimonials" class="mobile-link">Reviews</a>
+    <a href="#faq" class="mobile-link">FAQ</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-grain"></div>
+    <div class="hero-content">
+      <div class="hero-tag">🌿 Premium Agriculture Solutions</div>
+      <h1 class="hero-headline">
+        Where Fields<br>Wear Their<br><em>Crown</em>
+      </h1>
+      <p class="hero-sub">
+        Crop Crown delivers world-class agricultural consulting, crop management, and farming solutions — from seed selection to harvest excellence.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get a Free Consultation</a>
+        <a href="#services" class="btn-outline">Explore Services</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      Scroll to explore
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-target="1200">0</div>
+        <div class="hero-stat-label">Hectares Managed</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-target="350">0</div>
+        <div class="hero-stat-label">Farms Served</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-target="15">0</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT STRIP -->
+  <div id="about-strip">
+    <div class="about-strip-inner">
+      <div class="about-strip-text">
+        Agriculture isn't just a profession — it's our<br><em>legacy, passion, and crown achievement.</em>
+      </div>
+      <div class="about-strip-divider"></div>
+      <div class="about-strip-cred">
+        <div class="cred-item">
+          <div class="cred-num">98%</div>
+          <div class="cred-label">Client Retention</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-num">40%</div>
+          <div class="cred-label">Avg Yield Increase</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-num">ISO</div>
+          <div class="cred-label">Certified Processes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <span class="section-tag">What We Do</span>
+        <h2 class="section-title">Premium Agricultural<br><em>Services</em></h2>
+        <p class="section-desc">Comprehensive, science-backed farming solutions tailored for modern agriculture — precision, sustainability, and unmatched yield.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">🌱</div>
+          <h3 class="service-title">Crop Management</h3>
+          <p class="service-desc">End-to-end crop lifecycle management — from variety selection and sowing schedules to nutrient planning and harvesting protocols designed for maximum yield.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">🧪</div>
+          <h3 class="service-title">Soil Health Analysis</h3>
+          <p class="service-desc">Advanced soil testing, pH balancing, and micro-nutrient mapping. We transform your land's biology into a growth powerhouse through precision amendments.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">💧</div>
+          <h3 class="service-title">Smart Irrigation</h3>
+          <p class="service-desc">IoT-enabled drip and sprinkler systems with automated scheduling. Reduce water waste by up to 60% while maintaining optimal moisture for every crop type.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">🛡️</div>
+          <h3 class="service-title">Pest & Disease Control</h3>
+          <p class="service-desc">Integrated Pest Management (IPM) strategies using biological controls and targeted treatments that protect yields without harming the ecosystem.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">📡</div>
+          <h3 class="service-title">Precision Farming</h3>
+          <p class="service-desc">Satellite imagery, drone surveillance, and GPS mapping for data-driven decisions. Monitor field variability and respond with pinpoint accuracy.</p>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">📦</div>
+          <h3 class="service-title">Post-Harvest Solutions</h3>
+          <p class="service-desc">Cold storage guidance, grading standards, market linkage, and supply chain optimization to ensure your harvest reaches buyers at peak quality and price.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section id="why">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-left reveal">
+          <span class="section-tag">Why Crop Crown</span>
+          <h2 class="section-title" style="color:var(--white)">We Don't Just Farm —<br><em>We Engineer Growth</em></h2>
+          <p class="section-desc" style="color:rgba(255,255,255,0.6)">Our approach blends generations of agricultural wisdom with cutting-edge technology, delivering results that speak louder than any promise.</p>
+          <div class="why-list">
+            <div class="why-item">
+              <div class="why-num">01</div>
+              <div>
+                <div class="why-item-title">Science-Led Strategy</div>
+                <div class="why-item-desc">Every recommendation is backed by soil science, agronomy research, and field data — not guesswork.</div>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-num">02</div>
+              <div>
+                <div class="why-item-title">Sustainable by Design</div>
+                <div class="why-item-desc">We build farming systems that protect the earth, reduce chemical dependency, and thrive for decades.</div>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-num">03</div>
+              <div>
+                <div class="why-item-title">Dedicated Agronomists</div>
+                <div class="why-item-desc">Your assigned expert is on-call throughout the season — proactive, responsive, and invested in your success.</div>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-num">04</div>
+              <div>
+                <div class="why-item-title">Proven Track Record</div>
+                <div class="why-item-desc">350+ farms across multiple climates have achieved 40%+ yield improvements under our guidance.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="why-right reveal reveal-delay-2">
+          <img 
+            src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&q=80" 
+            alt="Agronomist inspecting crops" 
+            class="why-img"
+          />
+          <div class="why-badge">
+            <div class="why-badge-num">15+</div>
+            <div class="why-badge-text">Years of Excellence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section id="packages">
+    <div class="container">
+      <div class="packages-header reveal">
+        <span class="section-tag">Our Plans</span>
+        <h2 class="section-title">Choose Your <em>Growth Plan</em></h2>
+        <p class="section-desc">Transparent, value-packed packages built for farms of every scale. No hidden costs — just results.</p>
+      </div>
+      <div class="packages-grid">
+        <div class="pkg-card reveal reveal-delay-1">
+          <div class="pkg-tier">Starter</div>
+          <div class="pkg-name">Seedling</div>
+          <p style="font-size:0.875rem;color:var(--text-light);margin-bottom:12px">Perfect for small farms & beginners</p>
+          <div class="pkg-price"><sup>$</sup>299<small>/season</small></div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-features">
+            <li class="pkg-feature">Soil Health Report (1 analysis)</li>
+            <li class="pkg-feature">Crop Selection Consultation</li>
+            <li class="pkg-feature">Basic Irrigation Plan</li>
+            <li class="pkg-feature">Monthly Advisory Call</li>
+            <li class="pkg-feature">Email Support</li>
+          </ul>
+          <a href="#contact" class="pkg-btn pkg-btn-outline">Get Started</a>
+        </div>
+        <div class="pkg-card featured reveal reveal-delay-2">
+          <div class="pkg-popular">Most Popular</div>
+          <div class="pkg-tier">Professional</div>
+          <div class="pkg-name">Harvest</div>
+          <p style="font-size:0.875rem;color:rgba(255,255,255,0.45);margin-bottom:12px">Ideal for mid-size commercial farms</p>
+          <div class="pkg-price"><sup>$</sup>799<small>/season</small></div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-features">
+            <li class="pkg-feature">Full Soil & Water Analysis</li>
+            <li class="pkg-feature">Precision Crop Planning</li>
+            <li class="pkg-feature">Smart Irrigation Design</li>
+            <li class="pkg-feature">IPM Pest Strategy</li>
+            <li class="pkg-feature">Drone Field Mapping (2 visits)</li>
+            <li class="pkg-feature">Bi-weekly Agronomist Calls</li>
+            <li class="pkg-feature">Priority Support 24/7</li>
+          </ul>
+          <a href="#contact" class="pkg-btn pkg-btn-solid">Get Started</a>
+        </div>
+        <div class="pkg-card reveal reveal-delay-3">
+          <div class="pkg-tier">Enterprise</div>
+          <div class="pkg-name">Crown</div>
+          <p style="font-size:0.875rem;color:var(--text-light);margin-bottom:12px">For large-scale agri-businesses</p>
+          <div class="pkg-price"><sup>$</sup>1,999<small>/season</small></div>
+          <div class="pkg-divider"></div>
+          <ul class="pkg-features">
+            <li class="pkg-feature">Everything in Harvest</li>
+            <li class="pkg-feature">Dedicated Senior Agronomist</li>
+            <li class="pkg-feature">Monthly Drone Surveillance</li>
+            <li class="pkg-feature">Post-Harvest Market Access</li>
+            <li class="pkg-feature">Supply Chain Optimization</li>
+            <li class="pkg-feature">On-Site Farm Visits (4×)</li>
+            <li class="pkg-feature">Custom Reporting Dashboard</li>
+          </ul>
+          <a href="#contact" class="pkg-btn pkg-btn-outline">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="testi-header reveal">
+        <span class="section-tag">Client Stories</span>
+        <h2 class="section-title">Farmers Who Wear <em>Their Crown</em></h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card reveal reveal-delay-1">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Crop Crown transformed our 200-acre wheat farm. We saw a 52% yield increase in a single season. Their agronomist was on-call every week — genuinely invested in our success."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AK</div>
+            <div>
+              <div class="testi-name">Ahmed Khan</div>
+              <div class="testi-role">Wheat Farmer, Punjab</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-2">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The precision farming service paid for itself in the first month. Drone mapping revealed an irrigation blind spot we'd never noticed. Problem fixed, crop saved."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SR</div>
+            <div>
+              <div class="testi-name">Sarah Rehman</div>
+              <div class="testi-role">Mango Orchard, Sindh</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card reveal reveal-delay-3">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"We chose the Crown Enterprise package and the ROI was extraordinary. Market linkages alone got us 30% better pricing than our previous season. World-class team."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">FM</div>
+            <div>
+              <div class="testi-name">Faisal Mirza</div>
+              <div class="testi-role">Agri-Business Owner, KPK</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-img-wrap reveal">
+          <img 
+            src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=600&q=80" 
+            alt="Crop Crown team in the field" 
+            class="about-img"
+          />
+          <div class="about-quote">
+            <p class="about-quote-text">"Every field has a crown waiting to be earned. We help you claim it."</p>
+            <div class="about-quote-author">— Crop Crown Founding Philosophy</div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <span class="section-tag">Our Story</span>
+          <h2 class="section-title">Rooted in the <em>Land,</em><br>Built for the Future</h2>
+          <p class="section-desc" style="margin-top:20px">
+            Crop Crown was founded by a team of agronomists, engineers, and farmers who shared a single conviction: that every piece of agricultural land deserves world-class attention.
+          </p>
+          <p style="font-size:0.9375rem;color:var(--text-mid);line-height:1.7;margin-top:16px">
+            Over 15 years, we've grown from a small consultancy into a full-service agriculture partner trusted by farms across South Asia. Our team combines on-ground experience with satellite-grade technology — because great farming is both an art and a science.
+          </p>
+          <div class="about-badges">
+            <span class="about-badge">🌿 ISO 9001 Certified</span>
+            <span class="about-badge">🏆 National Agri Award 2023</span>
+            <span class="about-badge">✅ 350+ Farms Served</span>
+            <span class="about-badge">🌍 Sustainable Practices</span>
+          </div>
+          <div class="mission-vision">
+            <div class="mv-card">
+              <div class="mv-title">Our Mission</div>
+              <p class="mv-text">To empower every farmer with the knowledge, tools, and support needed to achieve peak productivity and long-term land health.</p>
+            </div>
+            <div class="mv-card">
+              <div class="mv-title">Our Vision</div>
+              <p class="mv-text">A world where agriculture is sustainable, profitable, and dignified — where every farm wears its crown with pride.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:0">
+        <span class="section-tag" style="margin:0 auto 16px;display:block;text-align:center;padding-left:0">Common Questions</span>
+        <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-q">
+            What types of farms do you work with?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">We work with all farm types — cereal crops, fruit orchards, vegetable farms, and large-scale commercial operations. Our packages are scaled to fit farms from 5 acres to 5,000+ acres.</div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-q">
+            How quickly will I see yield improvements?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Most clients see measurable improvements within a single growing season. Soil health improvements compound over time, with peak results typically achieved in year 2–3 of our partnership.</div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-q">
+            Do you offer on-site farm visits?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Yes — our Harvest and Crown packages include field visits. Our Crown Enterprise plan includes up to 4 on-site visits per season, with additional visits available on request.</div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-q">
+            Is precision farming technology expensive to set up?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">We work with your existing infrastructure first. Many precision recommendations (like adjusted irrigation timing) cost nothing to implement. Hardware investments are phased and ROI-positive within one season.</div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-q">
+            Do you provide organic farming support?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Absolutely. Sustainable and organic transitions are a specialty. We guide farms through certification processes and build input-reducing systems that maintain or improve yields.</div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-q">
+            How do I get started with Crop Crown?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-a">Simply fill out our contact form or email us at contactglanders@gmail.com. We'll schedule a free 30-minute consultation call to understand your farm and recommend the right plan.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="reveal">
+          <span class="section-tag">Get In Touch</span>
+          <h2 class="section-title">Let's Grow<br><em>Together</em></h2>
+          <p class="section-desc">Ready to take your farm to the next level? Our team is standing by for a free consultation.</p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">📧</div>
+              <div>
+                <div class="contact-label">Email</div>
+                <a href="mailto:contactglanders@gmail.com" class="contact-value">contactglanders@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <div class="contact-label">Headquarters</div>
+                <div class="contact-value">Pakistan — Serving farms nationwide</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">🕐</div>
+              <div>
+                <div class="contact-label">Response Time</div>
+                <div class="contact-value">Within 24 hours, guaranteed</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">💬</div>
+              <div>
+                <div class="contact-label">Free Consultation</div>
+                <div class="contact-value">30 mins — no obligation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="contact-form-wrap">
+            <div class="form-title">Send Us a Message</div>
+            <div class="form-success" id="formSuccess">✅ Message sent! We'll be in touch within 24 hours.</div>
+            <form id="contactForm" action="mailto:contactglanders@gmail.com" method="post" enctype="text/plain">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fname">First Name</label>
+                  <input type="text" id="fname" name="First Name" placeholder="Your first name" required />
+                </div>
+                <div class="form-group">
+                  <label for="lname">Last Name</label>
+                  <input type="text" id="lname" name="Last Name" placeholder="Your last name" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="Email" placeholder="you@example.com" required />
+              </div>
+              <div class="form-group">
+                <label for="service">Service Interested In</label>
+                <select id="service" name="Service">
+                  <option value="">Select a service...</option>
+                  <option>Crop Management</option>
+                  <option>Soil Health Analysis</option>
+                  <option>Smart Irrigation</option>
+                  <option>Pest & Disease Control</option>
+                  <option>Precision Farming</option>
+                  <option>Post-Harvest Solutions</option>
+                  <option>Full Package Consultation</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="Message" placeholder="Tell us about your farm, its size, and what you're looking to achieve..."></textarea>
+              </div>
+              <button type="submit" class="form-submit">Send Message →</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div id="cta-banner">
+    <h2 class="cta-banner-title reveal">Your Best Harvest<br>Starts <em>Right Now</em></h2>
+    <p class="cta-banner-sub reveal">Join 350+ farms that trusted Crop Crown to transform their yield and profitability.</p>
+    <div class="cta-banner-actions reveal">
+      <a href="#contact" class="btn-primary">Book Free Consultation</a>
+      <a href="mailto:contactglanders@gmail.com" class="btn-outline">Email Us Directly</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name">Crop Crown</div>
+          <p class="footer-brand-desc">Premium agricultural consulting and farm management services. From seed to harvest — we're with you every step of the way.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">in</a>
+            <a href="#" aria-label="LinkedIn">li</a>
+            <a href="#" aria-label="YouTube">yt</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="#services">Crop Management</a></li>
+            <li><a href="#services">Soil Analysis</a></li>
+            <li><a href="#services">Smart Irrigation</a></li>
+            <li><a href="#services">Pest Control</a></li>
+            <li><a href="#services">Precision Farming</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#packages">Our Packages</a></li>
+            <li><a href="#testimonials">Client Stories</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="mailto:contactglanders@gmail.com">contactglanders@gmail.com</a></li>
+            <li><a href="#">Pakistan — Nationwide</a></li>
+            <li><a href="#">Free Consultation Available</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2025 Crop Crown. All rights reserved.</div>
+        <div class="footer-tagline">Where every field wears its crown.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-top" aria-label="Back to top">↑</button>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/+92300000000" id="wa-float" target="_blank" aria-label="WhatsApp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    // LOADER
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1800);
+    });
+
+    // NAVBAR SCROLL
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // MOBILE MENU
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    document.querySelectorAll('.mobile-link').forEach(l => {
+      l.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // BACK TO TOP
+    const backTop = document.getElementById('back-top');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    });
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // SCROLL REVEAL
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+
+    // COUNTER ANIMATION
+    function animateCounter(el, target, duration = 1800) {
+      let start = 0;
+      const step = target / (duration / 16);
+      const update = () => {
+        start = Math.min(start + step, target);
+        el.textContent = Math.floor(start) + (target >= 100 ? '+' : '+');
+        if (start < target) requestAnimationFrame(update);
+        else el.textContent = target + '+';
+      };
+      update();
+    }
+    const counters = document.querySelectorAll('[data-target]');
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(e.target, parseInt(e.target.dataset.target));
+          counterObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObs.observe(c));
+
+    // FAQ ACCORDION
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // FORM SUBMIT (mailto fallback + show success message)
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      const name = document.getElementById('fname').value;
+      const email = document.getElementById('email').value;
+      const msg = document.getElementById('message').value;
+      const service = document.getElementById('service').value;
+      const body = `Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${msg}`;
+      this.action = `mailto:contactglanders@gmail.com?subject=Crop Crown Inquiry from ${name}&body=${encodeURIComponent(body)}`;
+      const success = document.getElementById('formSuccess');
+      success.style.display = 'block';
+      setTimeout(() => success.style.display = 'none', 5000);
+    });
+
+    // SMOOTH SCROLL FOR ALL ANCHOR LINKS
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
